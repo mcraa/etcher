@@ -32,7 +32,10 @@ jobs:
           node-version: 14
       
       - name: set MSVS_VERSION
-        run: npm config set msvs_version 2022
+        if: matrix.os == windows-latest
+        run: |
+          npm config set msvs_version 2022 
+          npm i -g node-gyp
 
       - name: npm install
         run: npm ci
