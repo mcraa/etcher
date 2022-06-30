@@ -41,21 +41,21 @@ jobs:
         run: npm run test
       
       - name: electron build
-        if: $ {{ runner.os == 'macOS'}}
+        if: ${{ runner.os == 'macOS'}}
         run: ./node_modules/.bin/electron-builder -c electron-builder.yml
         # env:
         #   CSC_LINK: ...
         #   CSC_KEY_PASSWORD: ...
 
       - name: electron build
-        if: $ {{ runner.os == 'Windows'}}
+        if: ${{ runner.os == 'Windows'}}
         run: ./node_modules/.bin/electron-builder -c electron-builder.yml
         # env:
         #   CSC_LINK: ...
         #   CSC_KEY_PASSWORD: ...
 
       - name: electron build
-        if: $ {{ runner.os == 'Linux'}}
+        if: ${{ runner.os == 'Linux'}}
         run: ./node_modules/.bin/electron-builder -c electron-builder.yml
 
       - name: store build output
