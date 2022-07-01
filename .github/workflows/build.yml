@@ -37,6 +37,10 @@ jobs:
           npm config set msvs_version 2022 
           npm i -g node-gyp
 
+      - name: set MSVS_VERSION
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: microsoft/setup-msbuild@v1.1
+
       - name: npm install
         run: npm ci
      
