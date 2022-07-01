@@ -37,7 +37,7 @@ jobs:
           npm config set msvs_version 2019 
           npm i -g node-gyp
 
-      - name: set MSVS_VERSION
+      - name: add msbuild to PATH
         if: ${{ runner.os == 'Windows' }}
         uses: microsoft/setup-msbuild@v1.1
 
@@ -49,6 +49,8 @@ jobs:
       
       - name: tests
         run: npm run test
+        env:
+          DISPLAY: :0
       
       - name: electron build
         if: ${{ runner.os == 'macOS'}}
