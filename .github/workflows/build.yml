@@ -20,7 +20,7 @@ jobs:
   build: 
     strategy: 
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-2019, ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: checkout
@@ -32,13 +32,13 @@ jobs:
           node-version: 14
       
       - name: set MSVS_VERSION
-        if: ${{ matrix.os == 'windows-latest' }}
+        if: ${{ runner.os == 'Windows' }}
         run: |
-          npm config set msvs_version 2022 
+          npm config set msvs_version 2019 
           npm i -g node-gyp
 
       - name: set MSVS_VERSION
-        if: ${{ matrix.os == 'windows-latest' }}
+        if: ${{ runner.os == 'Windows' }}
         uses: microsoft/setup-msbuild@v1.1
 
       - name: npm install
