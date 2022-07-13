@@ -47,11 +47,18 @@ jobs:
       - name: webpack build
         run: npm run webpack 
       
+      - name: setup test dependencies:xvfb
+        if: ${{ runner.os == 'Linux' }}
+        run: sudo apt-get install xvfb
+
       - name: tests
+        if: ${{ runner.os != 'Linux' }}
         run: npm run test
-        env:
-          DISPLAY: :0
-      
+
+      - name: tests
+        if: ${{ runner.os == 'Linux' }}
+        run: xvfb-run --server-args="-extension GLX -screen 0 1024x768x24" env ELECTRON_NO_ATTACH_CONSOLE=true npm run test
+        
       - name: electron build
         if: ${{ runner.os == 'macOS'}}
         run: ./node_modules/.bin/electron-builder -c electron-builder.yml
